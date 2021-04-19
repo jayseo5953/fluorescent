@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import redShoesImg from "./assets/product_red.png";
-import greenShoesImg from "./assets/product_green.png";
-import greyShoesImg from "./assets/product_grey.png";
+import redShoesImg from "./assets/product_red.svg";
+import greenShoesImg from "./assets/product_green.svg";
+import greyShoesImg from "./assets/product_grey.svg";
 
 const productDetails = {
   name: "Red Flynknit Trainers",
@@ -46,42 +46,49 @@ const productDetails = {
     },
   ],
 };
-const OptionDetailsContainerWidth = "30vw";
+
+const optionDetailsContainerWith = "30vw";
+const normalFontSize = "14px";
 
 const AddToCardButton = styled.div`
   border: 1px rgba(0, 0, 0, 0.1) solid;
   border-radius: 20px;
-  color: rgba(0, 0, 0, ${({ disabled }) => (disabled ? 0.5 : 1)});
-  padding: 0.75rem;
-  margin: 1rem auto;
-  width: 80%;
+  color: #1d1d1d;
+  font-size: ${normalFontSize};
+  line-height: 24px;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  padding: 12px;
+  margin: 1rem 0;
   text-align: center;
   &:hover {
-    border: ${({ disabled }) => !disabled && "1px rgba(0, 0, 0, 1) solid"};
+    border: ${({ disabled }) => !disabled && "1px #1d1d1d solid"};
     cursor: ${({ disabled }) => !disabled && "pointer"};
   }
 `;
 
 const Body = styled.div`
+  background: #ffffff;
   display: flex;
   justify-content: flex-end;
-  margin-right: calc(${OptionDetailsContainerWidth} + 3rem);
+  margin-right: calc(${optionDetailsContainerWith} + 3rem);
 `;
 
-const CircleButton = styled.div.attrs({ className: "magnify-button" })`
+const CircleButton = styled.div.attrs({
+  className: "magnify-button",
+})`
   align-items: center;
   background: #ffffff;
   border-radius: 50%;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.31);
   display: flex;
   opacity: 0;
-  height: 2.5rem;
+  height: 40px;
   justify-content: center;
-  width: 2.5rem;
   position: absolute;
   top: 1rem;
   right: 1rem;
   transition: opacity 0.2s;
+  width: 40px;
   &:hover {
     cursor: pointer;
   }
@@ -94,14 +101,14 @@ const ColorSelectButton = styled.div`
     colorGradients &&
     `linear-gradient(-45deg, ${colorGradients[0]} 50%, ${colorGradients[1]} 50%)`};
   border-radius: 50%;
-  height: 1.1rem;
-  width: 1.1rem;
+  height: 22px;
+  width: 22px;
 `;
 
 const ColorSelectButtonWrapper = styled.div`
-  border: 1px solid rgba(0, 0, 0, ${({ selected }) => (selected ? 1 : 0.1)});
+  border: 1px solid ${({ selected }) => (selected ? "#1B1B1B" : "#DEDEDE")};
   border-radius: 50%;
-  padding: 0.2rem;
+  padding: 3px;
   margin-left: 0.25rem;
   &:first-child {
     margin-left: 0;
@@ -112,8 +119,9 @@ const ColorSelectButtonWrapper = styled.div`
 `;
 
 const Divider = styled.hr`
-  background: rgba(8, 40, 80, 0.2);
+  background: #dfdfdf;
   border: none;
+  box-sizing: content-box;
   height: 1px;
   margin: 1.5rem 0;
 `;
@@ -125,17 +133,19 @@ const MaterialIcons = styled.span.attrs({
 const OptionDetailsContainer = styled.div`
   position: fixed;
   right: 0;
-  width: ${OptionDetailsContainerWidth};
+  width: ${optionDetailsContainerWith};
   padding-right: 1rem;
+  & * {
+    font-family: "IBM Plex Sans", sans-serif;
+  }
 `;
 
 const ProductImg = styled.img.attrs(({ src, alt }) => ({ src, alt }))`
-  height: 100%;
   width: 100%;
 `;
 
 const ProductImgContainer = styled.div`
-  border: ${({ selected }) => selected && `1px solid green`};
+  border: ${({ selected }) => selected && `1px solid #0077C8`};
   position: relative;
   margin: 1rem;
   &:hover {
@@ -146,11 +156,23 @@ const ProductImgContainer = styled.div`
 `;
 
 const ProductOptionLabel = styled.p`
+  font-size: ${normalFontSize};
   font-weight: bold;
+  line-height: 28px;
 `;
 
-const ProductPrice = styled.p`
-  color: rgba(0, 0, 0, 0.75);
+const ProductPrice = styled.div`
+  color: #1d1d1d;
+  font-size: 14px;
+  line-height: 24px;
+  margin-top: 4px;
+`;
+
+const ProductTitle = styled.div`
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  margin-top: 2rem;
 `;
 
 const OptionList = styled.div`
@@ -159,13 +181,12 @@ const OptionList = styled.div`
 `;
 
 const SizeSelectButton = styled.div`
-  background-color: ${({ selected }) => (selected ? "black" : "#e3e0e0")};
-  border: ${({ selected }) => (selected ? "1px solid black" : "none")};
+  background-color: ${({ selected }) => (selected ? "#1D1D1D" : "#F1F1F1")};
   border-radius: 20px;
-  color: ${({ selected }) => (selected ? "white" : "black")};
+  color: ${({ selected }) => (selected ? "#FFFFFF" : "#000000")};
   font-size: 0.95rem;
-  padding: 0.7rem 1rem;
-  margin-left: 0.5rem;
+  padding: 8px 16px;
+  margin-left: 8px;
   white-space: nowrap;
   &:first-child {
     margin-left: 0;
@@ -175,9 +196,7 @@ const SizeSelectButton = styled.div`
   }
 `;
 
-const ProductListContainer = styled.div`
-  width: 50vw;
-`;
+const ProductListContainer = styled.div``;
 const SizeSelectSection = styled.div``;
 
 const MagnifyButton = () => {
@@ -261,7 +280,7 @@ function App() {
         ))}
       </ProductListContainer>
       <OptionDetailsContainer>
-        <h2>{name}</h2>
+        <ProductTitle>{name}</ProductTitle>
         <ProductPrice>{price}</ProductPrice>
         <br />
         <SizeSelectSection>
